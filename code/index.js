@@ -9,6 +9,7 @@ let isDragging = false;
 let offsetX, offsetY;
 let activeNode = null;
 let oldName;
+let linkNode;
 
 document.addEventListener("dblclick", (e) => {
     if (e.target.classList.contains("node"))
@@ -27,7 +28,6 @@ document.addEventListener("dblclick", (e) => {
 
 function addFuctionToNode(node) {
     g.addVertex(node.textContent);
-    g.printGraph();
 
     node.addEventListener("mousedown", (e) => {
         if (node.isContentEditable)
@@ -49,6 +49,15 @@ function addFuctionToNode(node) {
     node.addEventListener("contextmenu", (e) => {
         e.preventDefault();
         console.log("Right-clicked!");
+
+        if (linkNode == null)
+            linkNode = node;
+        else{
+            g.addEdge(linkNode.textContent, node.textContent);
+            linkNode = null;
+        }
+
+        g.printGraph();
     });
 
     node.addEventListener("keydown", (e) => {
@@ -58,12 +67,10 @@ function addFuctionToNode(node) {
                 e.preventDefault();
                 node.contentEditable = "false";
             }
-            else{
+            else {
                 alert("That value exits.");
                 node.textContent = oldName;
             }
-
-            g.printGraph();
         }
     });
 
