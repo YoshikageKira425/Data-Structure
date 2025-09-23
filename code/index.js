@@ -1,46 +1,72 @@
 const dragBox = document.getElementById("dragBox");
 
+addFuctionToNode(dragBox);
+
 let isDragging = false;
 let offsetX, offsetY;
+let activeNode = null;
 
-dragBox.addEventListener("mousedown", (e) => {
-    if (dragBox.isContentEditable)
+document.addEventListener("dblclick", (e) => {
+    if (e.target.classList.contains("node")) 
         return;
 
-    isDragging = true;
-    offsetX = e.clientX - dragBox.offsetLeft;
-    offsetY = e.clientY - dragBox.offsetTop;
-    dragBox.classList.replace("cursor-grab", "cursor-grabbing");
+    const newElement = document.createElement("div");
+    newElement.className = "node w-20 h-20 bg-blue-600 border-2 border-blue-800 text-white flex items-center justify-center rounded-full shadow-lg cursor-grab absolute";
+    newElement.textContent = "Drag Me";
+
+    newElement.style.left = `${e.clientX - 40}px`;
+    newElement.style.top = `${e.clientY - 40}px`;
+
+    document.body.appendChild(newElement);
+    addFuctionToNode(newElement);
 });
 
-dragBox.addEventListener("dblclick", () => {
-    dragBox.contentEditable = "true";
-    dragBox.focus();
-});
+function addFuctionToNode(node) {
+    node.addEventListener("mousedown", (e) => {
+        if (node.isContentEditable)
+            return;
 
-dragBox.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    console.log("Right-clicked!");
-});
+        isDragging = true;
+        activeNode = node;
+        offsetX = e.clientX - node.offsetLeft;
+        offsetY = e.clientY - node.offsetTop;
+        node.classList.replace("cursor-grab", "cursor-grabbing");
+    });
 
-dragBox.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
+    node.addEventListener("dblclick", () => {
+        node.contentEditable = "true";
+        node.focus();
+    });
+
+    node.addEventListener("contextmenu", (e) => {
         e.preventDefault();
-        dragBox.contentEditable = "false";
-    }
-});
+        console.log("Right-clicked!");
+    });
 
-dragBox.addEventListener("blur", () => {
-    dragBox.contentEditable = "false";
-});
+    node.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault();
+            node.contentEditable = "false";
+        }
+    });
 
-document.addEventListener("mousemove", (e) => {
-    if (!isDragging) return;
-    dragBox.style.left = `${e.clientX - offsetX}px`;
-    dragBox.style.top = `${e.clientY - offsetY}px`;
-});
+    node.addEventListener("blur", () => {
+        node.contentEditable = "false";
+    });
 
-document.addEventListener("mouseup", () => {
-    isDragging = false;
-    dragBox.classList.replace("cursor-grabbing", "cursor-grab");
-});
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) 
+            return;
+
+        if (e.target != node)
+            return;
+
+        node.style.left = `${e.clientX - offsetX}px`;
+        node.style.top = `${e.clientY - offsetY}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+        node.classList.replace("cursor-grabbing", "cursor-grab");
+    });
+}
