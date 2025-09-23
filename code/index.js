@@ -1,3 +1,6 @@
+import { Graph } from "./structure.js";
+
+const g = new Graph();
 const dragBox = document.getElementById("dragBox");
 
 addFuctionToNode(dragBox);
@@ -5,14 +8,15 @@ addFuctionToNode(dragBox);
 let isDragging = false;
 let offsetX, offsetY;
 let activeNode = null;
+let oldName;
 
 document.addEventListener("dblclick", (e) => {
-    if (e.target.classList.contains("node")) 
+    if (e.target.classList.contains("node"))
         return;
 
     const newElement = document.createElement("div");
     newElement.className = "node w-20 h-20 bg-blue-600 border-2 border-blue-800 text-white flex items-center justify-center rounded-full shadow-lg cursor-grab absolute";
-    newElement.textContent = "Drag Me";
+    newElement.textContent = Math.random();
 
     newElement.style.left = `${e.clientX - 40}px`;
     newElement.style.top = `${e.clientY - 40}px`;
@@ -22,6 +26,9 @@ document.addEventListener("dblclick", (e) => {
 });
 
 function addFuctionToNode(node) {
+    g.addVertex(node.textContent);
+    g.printGraph();
+
     node.addEventListener("mousedown", (e) => {
         if (node.isContentEditable)
             return;
@@ -35,6 +42,7 @@ function addFuctionToNode(node) {
 
     node.addEventListener("dblclick", () => {
         node.contentEditable = "true";
+        oldName = node.textContent;
         node.focus();
     });
 
@@ -45,8 +53,17 @@ function addFuctionToNode(node) {
 
     node.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
-            e.preventDefault();
-            node.contentEditable = "false";
+            if (!g.doesVertexExits(e.target.textContent)) {
+                g.renameVertex(oldName, e.target.textContent);
+                e.preventDefault();
+                node.contentEditable = "false";
+            }
+            else{
+                alert("That value exits.");
+                node.textContent = oldName;
+            }
+
+            g.printGraph();
         }
     });
 
@@ -55,7 +72,7 @@ function addFuctionToNode(node) {
     });
 
     document.addEventListener("mousemove", (e) => {
-        if (!isDragging) 
+        if (!isDragging)
             return;
 
         if (e.target != node)
