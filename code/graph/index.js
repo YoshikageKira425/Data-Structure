@@ -1,12 +1,13 @@
 import { Graph } from "./structure.js";
 
 const g = new Graph();
-const dragBox = document.getElementById("dragBox");
+
+const nodeCount = document.getElementById("count");
 
 const nodeContainer = document.getElementById("node-container");
 const lineContainer = document.getElementById("line-container");
 
-addFuctionToNode(dragBox);
+let count = 0;
 
 let isDragging = false;
 let offsetX, offsetY;
@@ -19,9 +20,13 @@ document.addEventListener("dblclick", (e) => {
     if (e.target.classList.contains("node"))
         return;
 
+    count++;
+    nodeCount.textContent = count;
+
     const newElement = document.createElement("div");
     newElement.className = "node select-none w-20 h-20 bg-blue-600 border-2 border-blue-800 text-white flex items-center justify-center rounded-full shadow-lg cursor-grab absolute";
     newElement.textContent = Math.random();
+    newElement.id = `node-${newElement.textContent}`;
 
     newElement.style.left = `${e.clientX - 40}px`;
     newElement.style.top = `${e.clientY - 40}px`;
@@ -31,7 +36,7 @@ document.addEventListener("dblclick", (e) => {
 });
 
 document.addEventListener("contextmenu", (e) => {
-    if (!e.target.classList.contains("node")){
+    if (!e.target.classList.contains("node")) {
         linkNode = null;
 
         if (line)
@@ -68,6 +73,7 @@ function addFuctionToNode(node) {
             linkNode = node;
 
             line = document.createElement("div");
+            line.id = "line";
             line.className = "absolute select-none h-0.5 bg-red-500 transform-gpu origin-left";
             lineContainer.appendChild(line);
 
@@ -76,18 +82,30 @@ function addFuctionToNode(node) {
         else {
             removeConnectLineToMouse();
             connectElements(linkNode, node, line);
+            line = null;
+
             g.addEdge(linkNode.textContent, node.textContent);
             linkNode = null;
         }
-
-        g.printGraph();
     });
 
     node.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
             if (!g.doesVertexExits(e.target.textContent)) {
+                const linkedNodes = g.getVertexEdges(oldName);
+                for (let index = 0; index < linkedNodes.length; index++) {
+                    const element = linkedNodes[index];
+
+                    let line = document.getElementById(`link-${oldName}-${element}`) ?? null;
+                    if (!line)
+                        line = document.getElementById(`link-${element}-${oldName}`);
+
+                    line.id = `link-${e.target.textContent}-${element}`;
+                }
+
                 g.renameVertex(oldName, e.target.textContent);
-                e.preventDefault();
+                node.id = `node-${e.target.textContent}`;
+
                 node.contentEditable = "false";
             }
             else {
@@ -110,6 +128,19 @@ function addFuctionToNode(node) {
 
         node.style.left = `${e.clientX - offsetX}px`;
         node.style.top = `${e.clientY - offsetY}px`;
+
+        const linkedNodes = g.getVertexEdges(node.textContent);
+        for (let index = 0; index < linkedNodes.length; index++) {
+            const element = linkedNodes[index];
+
+            let line = document.getElementById(`link-${node.textContent}-${element}`) ?? null;
+            if (!line)
+                line = document.getElementById(`link-${element}-${node.textContent}`);
+
+            connectElements(node, document.getElementById(`node-${element}`), line);
+        }
+
+        console.log();
     });
 
     document.addEventListener("mouseup", () => {
@@ -119,6 +150,8 @@ function addFuctionToNode(node) {
 }
 
 function connectElements(el1, el2, lineEl) {
+    lineEl.id = `link-${el1.textContent}-${el2.textContent}`;
+
     const rect1 = el1.getBoundingClientRect();
     const rect2 = el2.getBoundingClientRect();
 

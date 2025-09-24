@@ -29,6 +29,17 @@ export class Graph {
         );
     }
 
+    removeVertex(vertex) {
+        if (!this.doesVertexExits(vertex))
+            return;
+        
+        while (this.adjacencyList[vertex]) {
+            const adjacentVertex = this.adjacencyList[vertex].pop();
+            this.removeEdge(vertex, adjacentVertex);
+        }
+        delete this.adjacencyList[vertex];
+    }
+
     renameVertex(oldName, newName) {
         if (!this.doesVertexExits([oldName])) {
             console.log(`${oldName} does not exist`);
@@ -46,16 +57,13 @@ export class Graph {
         delete this.adjacencyList[oldName];
     }
 
-    doesVertexExits(name) {
-        return name in this.adjacencyList;
+    getVertexEdges(vertex)
+    {
+        return this.adjacencyList[vertex] ?? [];
     }
 
-    removeVertex(vertex) {
-        while (this.adjacencyList[vertex]) {
-            const adjacentVertex = this.adjacencyList[vertex].pop();
-            this.removeEdge(vertex, adjacentVertex);
-        }
-        delete this.adjacencyList[vertex];
+    doesVertexExits(name) {
+        return name in this.adjacencyList;
     }
 
     printGraph() {
