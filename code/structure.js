@@ -10,8 +10,11 @@ export class Graph {
     }
 
     addEdge(vertex1, vertex2) {
-        if (!this.adjacencyList[vertex1]) this.addVertex(vertex1);
-        if (!this.adjacencyList[vertex2]) this.addVertex(vertex2);
+        if (!vertex1 || !vertex2)
+            return;
+
+        if (this.adjacencyList[vertex1].includes(vertex2) || this.adjacencyList[vertex2].includes(vertex1))
+            return;
 
         this.adjacencyList[vertex1].push(vertex2);
         this.adjacencyList[vertex2].push(vertex1);

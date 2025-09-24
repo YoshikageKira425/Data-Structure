@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/style/output.css">
+</head>
+
+<body>
+    <div class="relative w-[400px] h-[400px] border border-gray-400">
+        <div id="dotA" class="absolute w-5 h-5 bg-blue-500 rounded-full top-[50px] left-[50px]"></div>
+        <div id="dotB" class="absolute w-5 h-5 bg-blue-500 rounded-full top-[200px] left-[300px]"></div>
+        <div id="line" class="absolute h-0.5 bg-red-500 transform-gpu origin-left"></div>
+    </div>
+
+    <script>
+        // Get the elements
+        const dotA = document.getElementById('dotA');
+        const dotB = document.getElementById('dotB');
+        const line = document.getElementById('line');
+
+        function connectElements(el1, el2, lineEl) {
+            const rect1 = el1.getBoundingClientRect();
+            const rect2 = el2.getBoundingClientRect();
+
+            const center1X = rect1.left + rect1.width / 2;
+            const center1Y = rect1.top + rect1.height / 2;
+            const center2X = rect2.left + rect2.width / 2;
+            const center2Y = rect2.top + rect2.height / 2;
+
+            const dx = center2X - center1X;
+            const dy = center2Y - center1Y;
+            const distance = Math.sqrt(dx * dx + dy * dy);
+            const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+            lineEl.style.width = `${distance}px`;
+            lineEl.style.transform = `rotate(${angle}deg)`;
+            lineEl.style.left = `${center1X}px`;
+            lineEl.style.top = `${center1Y}px`;
+        }
+
+        // Connect the dots when the page loads
+        connectElements(dotA, dotB, line);
+
+        // Optional: Keep the line connected on window resize
+        window.addEventListener('resize', () => {
+            connectElements(dotA, dotB, line);
+        });
+    </script>
+</body>
+
+</html>
