@@ -1,6 +1,6 @@
 import { Graph } from "./structure.js";
 
-const g = new Graph();
+export let g = new Graph();
 
 const nodeCount = document.getElementById("count");
 
@@ -17,7 +17,7 @@ let linkNode;
 let line;
 
 document.addEventListener("dblclick", (e) => {
-    if (e.target.classList.contains("node"))
+    if (e.target.classList.contains("node") || e.target.classList.contains("fixed"))
         return;
 
     count++;
@@ -45,7 +45,7 @@ document.addEventListener("contextmenu", (e) => {
     }
 });
 
-function addFuctionToNode(node) {
+export function addFuctionToNode(node) {
     g.addVertex(node.textContent);
 
     node.addEventListener("mousedown", (e) => {
@@ -130,6 +130,7 @@ function addFuctionToNode(node) {
         node.style.top = `${e.clientY - offsetY}px`;
 
         const linkedNodes = g.getVertexEdges(node.textContent);
+        console.log(linkedNodes )
         for (let index = 0; index < linkedNodes.length; index++) {
             const element = linkedNodes[index];
 
@@ -139,8 +140,6 @@ function addFuctionToNode(node) {
 
             connectElements(node, document.getElementById(`node-${element}`), line);
         }
-
-        console.log();
     });
 
     document.addEventListener("mouseup", () => {
@@ -149,7 +148,7 @@ function addFuctionToNode(node) {
     });
 }
 
-function connectElements(el1, el2, lineEl) {
+export function connectElements(el1, el2, lineEl) {
     lineEl.id = `link-${el1.textContent}-${el2.textContent}`;
 
     const rect1 = el1.getBoundingClientRect();
@@ -171,6 +170,7 @@ function connectElements(el1, el2, lineEl) {
     lineEl.style.top = `${center1Y}px`;
 }
 
+//#region The line follows to the mouse
 let fixedX, fixedY, lineEl;
 
 function mouseMoveHandler(event) {
@@ -200,3 +200,4 @@ function connectLineToMouse(element, line) {
 function removeConnectLineToMouse() {
     document.removeEventListener('mousemove', mouseMoveHandler);
 }
+//#endregion

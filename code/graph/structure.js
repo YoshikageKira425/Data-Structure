@@ -3,6 +3,11 @@ export class Graph {
         this.adjacencyList = {};
     }
 
+    updatedGraph(graph)
+    {
+        this.adjacencyList = graph.adjacencyList;
+    }
+
     addVertex(vertex) {
         if (!this.adjacencyList[vertex]) {
             this.adjacencyList[vertex] = [];
@@ -32,7 +37,7 @@ export class Graph {
     removeVertex(vertex) {
         if (!this.doesVertexExits(vertex))
             return;
-        
+
         while (this.adjacencyList[vertex]) {
             const adjacentVertex = this.adjacencyList[vertex].pop();
             this.removeEdge(vertex, adjacentVertex);
@@ -57,13 +62,30 @@ export class Graph {
         delete this.adjacencyList[oldName];
     }
 
-    getVertexEdges(vertex)
-    {
-        return this.adjacencyList[vertex] ?? [];
+    getVertexEdges(vertex) {
+        if (!this.adjacencyList[vertex]) return [];
+        return [...this.adjacencyList[vertex]];
     }
 
     doesVertexExits(name) {
         return name in this.adjacencyList;
+    }
+
+    getEdges() {
+        const edges = [];
+        const seen = new Set();
+
+        for (let vertex in this.adjacencyList) {
+            for (let neighbor of this.adjacencyList[vertex]) {
+                const edgeKey = [vertex, neighbor].sort().join("-");
+                if (!seen.has(edgeKey)) {
+                    seen.add(edgeKey);
+                    edges.push([vertex, neighbor]);
+                }
+            }
+        }
+
+        return edges;
     }
 
     printGraph() {
