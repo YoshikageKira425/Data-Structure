@@ -2,13 +2,10 @@ import { Graph } from "./structure.js";
 
 export let g = new Graph();
 
-const nodeCount = document.getElementById("count");
-
 const nodeContainer = document.getElementById("node-container");
 const lineContainer = document.getElementById("line-container");
 
-let count = 0;
-
+let count = 1;
 let isDragging = false;
 let offsetX, offsetY;
 let activeNode = null;
@@ -20,12 +17,10 @@ document.addEventListener("dblclick", (e) => {
     if (e.target.classList.contains("node") || e.target.classList.contains("fixed"))
         return;
 
-    count++;
-    nodeCount.textContent = count;
-
     const newElement = document.createElement("div");
     newElement.className = "node select-none w-20 h-20 bg-blue-600 border-2 border-blue-800 text-white flex items-center justify-center rounded-full shadow-lg cursor-grab absolute";
-    newElement.textContent = Math.random();
+    newElement.textContent = count;
+    count++;
     newElement.id = `node-${newElement.textContent}`;
 
     newElement.style.left = `${e.clientX - 40}px`;
