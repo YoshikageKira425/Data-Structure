@@ -1,20 +1,53 @@
+import { sort } from "./sort/boubleSort.js";
+
 const container = document.getElementById("container");
-const slider = document.getElementById("slider");
-const sliderValue = document.getElementById("sliderValue");
+export const slider = document.getElementById("sliderAmount");
+const sliderValue = document.getElementById("sliderAmountValue");
+
+export const sliderTime = document.getElementById("sliderTime");
+const sliderTimeValue = document.getElementById("sliderTimeValue");
+
+export const sortButton = document.getElementById("sort");
+export const randomizerButton = document.getElementById("randomizer");
 
 let data = Array.from({ length: 20 }, (_, i) => i + 1);
 
+randomizer();
 setData();
 
 slider.addEventListener("input", () => {
     const value = parseInt(slider.value);
     sliderValue.textContent = `Value: ${value}`;
+
     data = Array.from({ length: value }, (_, i) => i + 1);
-    console.log(data);
+    randomizer();
+
     setData();
 });
 
-function setData() {
+sliderTime.addEventListener("input", () => {
+    const value = parseFloat(sliderTime.value);
+    sliderTimeValue.textContent = `Time: ${value / 100}s`;
+});
+
+sortButton.addEventListener("click", () => {
+    sortButton.disabled = true;
+    randomizerButton.disabled = true;
+    slider.disabled = true;
+    sliderTime.disabled = true;
+
+    sortButton.classList.remove("bg-purple-700", "hover:bg-purple-900");
+    randomizerButton.classList.remove("bg-purple-700", "hover:bg-purple-900");
+
+    sortButton.classList.add("bg-gray-500", "cursor-not-allowed");
+    randomizerButton.classList.add("bg-gray-500", "cursor-not-allowed");
+
+    sort(data, parseFloat(sliderTime.value));
+});
+
+randomizerButton.addEventListener("click", () => { randomizer(); setData(); });
+
+export function setData() {
     container.innerHTML = "";
 
     data.forEach(number => {
@@ -25,3 +58,9 @@ function setData() {
     });
 }
 
+function randomizer() {
+    for (let i = data.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [data[i], data[randomIndex]] = [data[randomIndex], data[i]];
+    }
+}
