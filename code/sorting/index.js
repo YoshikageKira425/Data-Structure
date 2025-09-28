@@ -9,6 +9,8 @@ const sliderValue = document.getElementById("sliderAmountValue");
 export const sliderTime = document.getElementById("sliderTime");
 const sliderTimeValue = document.getElementById("sliderTimeValue");
 
+export const sortingAlgorithmSelect = document.getElementById("sortingAlgorithm");
+
 export const sortButton = document.getElementById("sort");
 export const randomizerButton = document.getElementById("randomizer");
 
@@ -33,18 +35,36 @@ sliderTime.addEventListener("input", () => {
 });
 
 sortButton.addEventListener("click", () => {
+    if (sortingAlgorithmSelect.value == "") {
+        alert("Chose a option.")
+        return;
+    }
+
     sortButton.disabled = true;
     randomizerButton.disabled = true;
     slider.disabled = true;
     sliderTime.disabled = true;
+    sortingAlgorithmSelect.disabled = true;
 
+    sortingAlgorithmSelect.classList.remove("bg-purple-700", "hover:bg-purple-900");
     sortButton.classList.remove("bg-purple-700", "hover:bg-purple-900");
     randomizerButton.classList.remove("bg-purple-700", "hover:bg-purple-900");
 
     sortButton.classList.add("bg-gray-500", "cursor-not-allowed");
+    sortingAlgorithmSelect.classList.add("bg-gray-500", "cursor-not-allowed");
     randomizerButton.classList.add("bg-gray-500", "cursor-not-allowed");
 
-    mergeSort(data, parseFloat(sliderTime.value));
+    switch (sortingAlgorithmSelect.value) {
+        case "Bouble Sort":
+            sort(data, parseFloat(sliderTime.value));
+            break;
+        case "Quick Sort":
+            quickSort(data, 0, data.length - 1, parseFloat(sliderTime.value))
+            break;
+        case "Merge Sort":
+            mergeSort(data, parseFloat(sliderTime.value));
+            break;
+    }
 });
 
 randomizerButton.addEventListener("click", () => { randomizer(); setData(); });

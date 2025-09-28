@@ -105,7 +105,7 @@ function selectPresent(index) {
 
     present.nodes.forEach(n => {
         const node = document.createElement("div");
-        node.className = "node select-none w-20 h-20 bg-blue-600 border-2 border-blue-800 text-white flex items-center justify-center rounded-full shadow-lg cursor-grab absolute";
+        node.className = "node select-none font-bold w-20 h-20 bg-purple-600 border-2 border-purple-800 text-white flex items-center justify-center rounded-full shadow-lg cursor-grab absolute";
         node.textContent = n.text;
         node.id = n.id;
         node.style.left = n.left;
