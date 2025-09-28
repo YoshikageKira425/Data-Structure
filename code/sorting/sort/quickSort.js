@@ -33,16 +33,16 @@ async function findPivot(data, start, end, time) {
         if (data[j] < pivot) {
             i++;
             [data[i], data[j]] = [data[j], data[i]];
-            setData();
 
+            setData();
             await sleep(time);
         }
     }
 
     i++;
     [data[i], data[end]] = [data[end], data[i]];
+    
     setData();
-
     await sleep(time);
 
     return i;
