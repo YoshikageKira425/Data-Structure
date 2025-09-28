@@ -1,4 +1,5 @@
 import { sort } from "./sort/boubleSort.js";
+import { quickSort } from "./sort/quickSort.js";
 
 const container = document.getElementById("container");
 export const slider = document.getElementById("sliderAmount");
@@ -42,7 +43,7 @@ sortButton.addEventListener("click", () => {
     sortButton.classList.add("bg-gray-500", "cursor-not-allowed");
     randomizerButton.classList.add("bg-gray-500", "cursor-not-allowed");
 
-    sort(data, parseFloat(sliderTime.value));
+    quickSort(data, 0, data.length - 1, parseFloat(sliderTime.value));
 });
 
 randomizerButton.addEventListener("click", () => { randomizer(); setData(); });
