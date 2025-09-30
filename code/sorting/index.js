@@ -3,16 +3,16 @@ import { quickSort } from "./sort/quickSort.js";
 import { mergeSort } from "./sort/mergeSort.js";
 
 const container = document.getElementById("container");
-export const slider = document.getElementById("sliderAmount");
+const slider = document.getElementById("sliderAmount");
 const sliderValue = document.getElementById("sliderAmountValue");
 
-export const sliderTime = document.getElementById("sliderTime");
+const sliderTime = document.getElementById("sliderTime");
 const sliderTimeValue = document.getElementById("sliderTimeValue");
 
-export const sortingAlgorithmSelect = document.getElementById("sortingAlgorithm");
+const sortingAlgorithmSelect = document.getElementById("sortingAlgorithm");
 
-export const sortButton = document.getElementById("sort");
-export const randomizerButton = document.getElementById("randomizer");
+const sortButton = document.getElementById("sort");
+const randomizerButton = document.getElementById("randomizer");
 
 let data = Array.from({ length: 20 }, (_, i) => i + 1);
 
@@ -85,4 +85,20 @@ function randomizer() {
         const randomIndex = Math.floor(Math.random() * (i + 1));
         [data[i], data[randomIndex]] = [data[randomIndex], data[i]];
     }
+}
+
+export function RenableElements(){
+    sortButton.disabled = false;
+    randomizerButton.disabled = false;
+    slider.disabled = false;
+    sliderTime.disabled = false;
+    sortingAlgorithmSelect.disabled = false;
+
+    sortingAlgorithmSelect.classList.remove("bg-gray-500", "cursor-not-allowed");
+    sortButton.classList.remove("bg-gray-500", "cursor-not-allowed");
+    randomizerButton.classList.remove("bg-gray-500", "cursor-not-allowed");
+
+    sortingAlgorithmSelect.classList.add("bg-purple-700", "hover:bg-purple-900");
+    sortButton.classList.add("bg-purple-700", "hover:bg-purple-900");
+    randomizerButton.classList.add("bg-purple-700", "hover:bg-purple-900");
 }

@@ -1,4 +1,4 @@
-import { setData, slider, sliderTime, sortButton, randomizerButton, sortingAlgorithmSelect } from './../index.js';
+import { setData, RenableElements } from './../index.js';
 
 export async function sort(data, time) {
     let swapped;
@@ -17,21 +17,9 @@ export async function sort(data, time) {
         }
     } while (swapped);
 
-    sortButton.disabled = false;
-    randomizerButton.disabled = false;
-    slider.disabled = false;
-    sliderTime.disabled = false;
-    sortingAlgorithmSelect.disabled = false;
-
-    sortingAlgorithmSelect.classList.remove("bg-gray-500", "cursor-not-allowed");
-    sortButton.classList.remove("bg-gray-500", "cursor-not-allowed");
-    randomizerButton.classList.remove("bg-gray-500", "cursor-not-allowed");
-
-    sortingAlgorithmSelect.classList.add("bg-purple-700", "hover:bg-purple-900");
-    sortButton.classList.add("bg-purple-700", "hover:bg-purple-900");
-    randomizerButton.classList.add("bg-purple-700", "hover:bg-purple-900");
+    RenableElements();
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    return new Promise(resolve => setTimeout(resolve, ms * 1000));
 }

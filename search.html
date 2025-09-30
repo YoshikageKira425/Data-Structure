@@ -47,7 +47,7 @@
 
                 <div class="flex flex-col space-y-3">
                     <label for="sliderAmount" class="text-lg font-semibold text-gray-300">Size</label>
-                    <input id="sliderAmount" type="range" min="5" max="40" value="10"
+                    <input id="sliderAmount" type="range" min="5" max="60" value="10"
                         class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-700 accent-purple-500">
                     <span id="sliderAmountValue" class="text-base font-mono text-purple-300 self-start">Value: 10</span>
                 </div>
@@ -58,19 +58,49 @@
                         class="w-full h-2 rounded-lg appearance-none cursor-pointer bg-gray-700 accent-purple-500">
                     <span id="sliderTimeValue" class="text-base font-mono text-purple-300 self-start">Time: 0.2s</span>
                 </div>
+
+                <div class="flex flex-col space-y-3">
+                    <label for="number" class="text-lg font-semibold text-gray-300">Number to find</label>
+                    <input id="number" type="number" min="1" max="10" value="3"
+                        class="w-full rounded-lg px-2 appearance-none cursor-pointer text-lg text-gray-300 bg-gray-700 accent-purple-500">
+                    <span id="numberText" class="text-base font-mono text-purple-300 self-start">Number: 3</span>
+                </div>
+
+                <div class="flex flex-col items-center mt-6">
+                    <select id="searchingAlgorithm"
+                        class="w-full bg-purple-600 hover:bg-purple-700 active:bg-purple-900 transition-colors duration-200 rounded-xl text-xl font-bold p-3 text-white shadow-lg">
+                        <option value="">Searching Algorithm</option>
+                        <option value="Linear Search">Linear Search</option>
+                        <option value="Binary Search">Binary Search</option>
+                    </select>
+                </div>
+
+                <div class="flex flex-col items-center mt-3">
+                    <button id="searching"
+                        class="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 transition-colors duration-200 rounded-xl text-xl font-extrabold p-4 text-white shadow-xl transform hover:scale-105 active:scale-95">
+                        START SEARCHING
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
     <div class="h-screen">
         <div class="w-full h-full flex items-center justify-center">
-            <div id ="container"
+            <div id="container"
                 class="flex flex-wrap justify-center gap-3 border-2 border-purple-800 bg-gray-900/80 p-6 rounded-3xl shadow-2xl max-w-4xl mx-auto backdrop-blur-sm">
                 <div
-                    class="w-14 h-14 flex-shrink-0 bg-gray-800 border border-purple-600 rounded-lg text-center flex items-center justify-center text-3xl font-bold text-purple-400 shadow-xl transition-all duration-300 transform hover:scale-105 hover:bg-gray-700">
+                    class="w-14 h-14 flex-shrink-0 bg-gray-800 border border-purple-600 rounded-lg text-center flex items-center justify-center text-3xl font-bold text-purple-400 shadow-xl">
                     1</div>
             </div>
         </div>
+    </div>
+
+    <div id="arrow" class="text-2xl hidden w-15 absolute transition-all duration-300 ease-in-out">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" fill="white">
+            <path
+                d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z" />
+        </svg>
     </div>
 
     <script src="code/search/index.js" type="module"></script>
