@@ -21,5 +21,5 @@ export async function sort(data, time) {
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms * 1000));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

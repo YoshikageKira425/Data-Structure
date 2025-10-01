@@ -46,9 +46,9 @@ sortButton.addEventListener("click", () => {
     sliderTime.disabled = true;
     sortingAlgorithmSelect.disabled = true;
 
-    sortingAlgorithmSelect.classList.remove("bg-purple-700", "hover:bg-purple-900");
-    sortButton.classList.remove("bg-purple-700", "hover:bg-purple-900");
-    randomizerButton.classList.remove("bg-purple-700", "hover:bg-purple-900");
+    sortingAlgorithmSelect.classList.remove("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
+    sortButton.classList.remove("bg-green-500", "hover:bg-green-600", "active:bg-green-700");
+    randomizerButton.classList.remove("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
 
     sortButton.classList.add("bg-gray-500", "cursor-not-allowed");
     sortingAlgorithmSelect.classList.add("bg-gray-500", "cursor-not-allowed");
@@ -98,7 +98,7 @@ export function RenableElements(){
     sortButton.classList.remove("bg-gray-500", "cursor-not-allowed");
     randomizerButton.classList.remove("bg-gray-500", "cursor-not-allowed");
 
-    sortingAlgorithmSelect.classList.add("bg-purple-700", "hover:bg-purple-900");
-    sortButton.classList.add("bg-purple-700", "hover:bg-purple-900");
-    randomizerButton.classList.add("bg-purple-700", "hover:bg-purple-900");
+    sortingAlgorithmSelect.classList.add("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
+    sortButton.classList.add("bg-green-500", "hover:bg-green-600", "active:bg-green-700");
+    randomizerButton.classList.add("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
 }

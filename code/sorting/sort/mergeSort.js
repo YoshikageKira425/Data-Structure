@@ -47,5 +47,5 @@ async function merge(leftArray, rightArray, data, time) {
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms * 1000));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }

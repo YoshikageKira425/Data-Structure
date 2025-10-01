@@ -40,5 +40,5 @@ async function findPivot(data, start, end, time) {
 }
 
 function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms * 1000));
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
