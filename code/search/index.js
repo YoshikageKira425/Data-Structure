@@ -1,4 +1,5 @@
 import { linearSearch } from "./Algorimth/linearsearch.js";
+import { binarySearch } from "./Algorimth/binarysearch.js";
 
 const container = document.getElementById("container");
 
@@ -55,7 +56,10 @@ searchingBtn.addEventListener("click", () => {
     searchingAlgorithm.classList.add("bg-gray-500", "cursor-not-allowed");
     number.classList.add("bg-gray-500", "cursor-not-allowed");
 
-    linearSearch(data, number.value, sliderTime.value);
+    if (searchingAlgorithm.value == "Linear Search")
+        linearSearch(data, number.value, sliderTime.value);
+    else if (searchingAlgorithm.value == "Binary Search")
+        binarySearch(data, number.value, sliderTime.value);
 });
 
 randomBtn.addEventListener("click", () => randomizer());
@@ -117,3 +121,23 @@ function randomizer() {
     setData();
 }
 
+export function RenableElement() {
+    randomBtn.disabled = false;
+    searchingAlgorithm.disabled = false;
+    sortBtn.disabled = false;
+    searchingBtn.disabled = false;
+    sliderTime.disabled = false;
+    slider.disabled = false;
+    number.disabled = false;
+
+    randomBtn.classList.add("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
+    sortBtn.classList.add("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
+    searchingBtn.classList.add("bg-green-500", "hover:bg-green-600", "active:bg-green-700");
+    searchingAlgorithm.classList.add("bg-purple-600", "hover:bg-purple-700", "active:bg-green-800");
+
+    randomBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
+    sortBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
+    searchingBtn.classList.remove("bg-gray-500", "cursor-not-allowed");
+    searchingAlgorithm.classList.remove("bg-gray-500", "cursor-not-allowed");
+    number.classList.remove("bg-gray-500", "cursor-not-allowed");
+}
