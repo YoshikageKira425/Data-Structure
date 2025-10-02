@@ -1,6 +1,7 @@
 import { sort } from "./sort/boubleSort.js";
 import { quickSort } from "./sort/quickSort.js";
 import { mergeSort } from "./sort/mergeSort.js";
+import { radixSort } from "./sort/radixSort.js";
 
 const container = document.getElementById("container");
 const slider = document.getElementById("sliderAmount");
@@ -64,6 +65,9 @@ sortButton.addEventListener("click", () => {
         case "Merge Sort":
             mergeSort(data, parseFloat(sliderTime.value));
             break;
+        case "Radix Sort":
+            radixSort(data, parseFloat(sliderTime.value));
+            break;
     }
 });
 
@@ -87,7 +91,7 @@ function randomizer() {
     }
 }
 
-export function RenableElements(){
+export function RenableElements() {
     sortButton.disabled = false;
     randomizerButton.disabled = false;
     slider.disabled = false;
