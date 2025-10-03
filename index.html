@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computer Science</title>
+    <link rel="stylesheet" href="/style/output.css">
+</head>
+
+<body class="bg-gray-800 select-none">
+    <header class="fixed top-0 left-0 right-0 z-10 bg-gray-800 shadow-lg border-b border-purple-900/50">
+        <div class="flex justify-between items-center max-w-7xl mx-auto p-4">
+            <div class="flex items-center space-x-4">
+                <h1 class="text-3xl font-extrabold text-purple-400 tracking-wider">
+                    Computer Science <span class="text-white font-light">Visualizer</span>
+                </h1>
+            </div>
+
+            <nav class="flex space-x-4">
+                <a href="/"
+                    class="text-lg font-semibold text-white bg-purple-600 px-4 py-2 rounded-full transition-all duration-300 shadow-lg">
+                    Home
+                </a>
+                
+                <a href="/graph.html"
+                    class="text-lg font-medium text-purple-300 hover:text-white hover:bg-gray-700/70 px-4 py-2 rounded-full transition-all duration-300">
+                    Graph
+                </a>
+                
+                <a href="/sorting.html"
+                    class="text-lg font-medium text-purple-300 hover:text-white hover:bg-gray-700/70 px-4 py-2 rounded-full transition-all duration-300">
+                    Sorting
+                </a>
+                
+                <a href="/search.html"
+                    class="text-lg font-medium text-purple-300 hover:text-white hover:bg-gray-700/70 px-4 py-2 rounded-full transition-all duration-300">
+                    Search
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-8 pt-10">
+        <div class="text-center mb-16 p-8 bg-gray-800 rounded-3xl shadow-xl border border-purple-900/50">
+            <h2 class="text-5xl font-extrabold text-white mb-3">
+                Visualize <span class="text-purple-400">Algorithms</span>
+            </h2>
+            <p class="text-xl text-gray-400 max-w-3xl mx-auto">
+                Explore fundamental computer science concepts through interactive, step-by-step visualizations. Select a
+                module below to begin your journey.
+            </p>
+        </div>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+            <a href="/graph.html" class="block">
+                <div
+                    class="bg-gray-800 p-6 rounded-2xl shadow-xl border-t-4 border-purple-500 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-purple-500/20">
+                    <h3 class="text-3xl font-bold text-purple-400 mb-2 flex items-center">
+                        <svg class="w-8 h-8 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z">
+                            </path>
+                        </svg>
+                        Graph
+                    </h3>
+                    <p class="text-gray-400">
+                        You can create your graphs.
+                    </p>
+                </div>
+            </a>
+
+            <a href="/sorting.html" class="block">
+                <div
+                    class="bg-gray-800 p-6 rounded-2xl shadow-xl border-t-4 border-green-500 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-green-500/20">
+                    <h3 class="text-3xl font-bold text-green-400 mb-2 flex items-center">
+                        <svg class="w-8 h-8 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M3 4h13M3 8h9m-9 4h6m4 0l7-7m0 0v10"></path>
+                        </svg>
+                        Sorting Algorithms
+                    </h3>
+                    <p class="text-gray-400">
+                        Visualize how various methods—**Merge Sort**, **Quick Sort**, etc.—organize data efficiently
+                        step-by-step.
+                    </p>
+                </div>
+            </a>
+
+            <a href="/search.html" class="block">
+                <div
+                    class="bg-gray-800 p-6 rounded-2xl shadow-xl border-t-4 border-blue-500 transition-all duration-300 transform hover:scale-[1.03] hover:shadow-blue-500/20">
+                    <h3 class="text-3xl font-bold text-blue-400 mb-2 flex items-center">
+                        <svg class="w-8 h-8 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M14.5 10c0 2.2-1.8 4-4 4s-4-1.8-4-4 1.8-4 4-4 4 1.8 4 4zM21 21l-5.2-5.2"></path>
+                        </svg>
+                        Search Algorithms
+                    </h3>
+                    <p class="text-gray-400">
+                        Explore searching techniques like **Binary Search** and **Depth-First Search** on different data
+                        structures.
+                    </p>
+                </div>
+            </a>
+
+        </section>
+    </main>
+</body>
+
+</html>
